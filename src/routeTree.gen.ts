@@ -9,13 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SplatRouteImport } from './routes/$'
+import { Route as Char91indexChar93RouteImport } from './routes/[index]'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as IndexIndexRouteImport } from './routes/index.index'
 
-const SplatRoute = SplatRouteImport.update({
-  id: '/$',
-  path: '/$',
+const Char91indexChar93Route = Char91indexChar93RouteImport.update({
+  id: '/index',
+  path: '/index',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -23,49 +22,40 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexIndexRoute = IndexIndexRouteImport.update({
-  id: '/index/',
-  path: '/index/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$': typeof SplatRoute
-  '/index/': typeof IndexIndexRoute
+  '/index': typeof Char91indexChar93Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$': typeof SplatRoute
-  '/index': typeof IndexIndexRoute
+  '/index': typeof Char91indexChar93Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/$': typeof SplatRoute
-  '/index/': typeof IndexIndexRoute
+  '/index': typeof Char91indexChar93Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$' | '/index/'
+  fullPaths: '/' | '/index'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$' | '/index'
-  id: '__root__' | '/' | '/$' | '/index/'
+  to: '/' | '/index'
+  id: '__root__' | '/' | '/index'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  SplatRoute: typeof SplatRoute
-  IndexIndexRoute: typeof IndexIndexRoute
+  Char91indexChar93Route: typeof Char91indexChar93Route
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/$': {
-      id: '/$'
-      path: '/$'
-      fullPath: '/$'
-      preLoaderRoute: typeof SplatRouteImport
+    '/index': {
+      id: '/index'
+      path: '/index'
+      fullPath: '/index'
+      preLoaderRoute: typeof Char91indexChar93RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -75,20 +65,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/index/': {
-      id: '/index/'
-      path: '/index'
-      fullPath: '/index/'
-      preLoaderRoute: typeof IndexIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  SplatRoute: SplatRoute,
-  IndexIndexRoute: IndexIndexRoute,
+  Char91indexChar93Route: Char91indexChar93Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
