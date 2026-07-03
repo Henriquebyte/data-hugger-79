@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: Index,
+  component: ServerBrowserPage,
 });
 
 type RoomFilter = "all" | ServerRoom;
@@ -34,7 +34,7 @@ const FILTERS: { id: RoomFilter; label: string }[] = [
   { id: "Custom Gametypes", label: "Custom Gametypes" },
 ];
 
-function Index() {
+export function ServerBrowserPage() {
   const router = useRouter();
   const fetchServers = useServerFn(getServers);
   const { data, isFetching, isLoading, refetch } = useQuery({
