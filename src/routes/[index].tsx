@@ -1,11 +1,17 @@
-import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+
+import { ServerBrowserPage } from "./index";
 
 export const Route = createFileRoute("/index")({
-  beforeLoad: ({ location }) => {
-    if (location.pathname === "/index") {
-      throw redirect({ to: "/" });
-    }
-
-    throw notFound();
-  },
+  head: () => ({
+    meta: [
+      { title: "SRB2 Server Browser — Servidores online agora" },
+      {
+        name: "description",
+        content:
+          "Lista em tempo real dos servidores de Sonic Robo Blast 2 ativos no master server oficial.",
+      },
+    ],
+  }),
+  component: ServerBrowserPage,
 });
